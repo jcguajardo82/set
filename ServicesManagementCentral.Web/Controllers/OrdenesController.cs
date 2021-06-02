@@ -74,6 +74,8 @@ namespace ServicesManagement.Web.Controllers
     }
     #endregion
 
+    [Authorize]
+
     public class OrdenesController : Controller
     {
         string UrlApi = "";
@@ -88,12 +90,7 @@ namespace ServicesManagement.Web.Controllers
         {
             try
             {
-                if (Session["loginTienda"] == null)
-                {
-                    return RedirectToAction("Login", "Security");
-                }
-
-
+                
                 Session["listaUN"] = DALServicesM.GetUN();
                 return View();
             }
@@ -106,10 +103,6 @@ namespace ServicesManagement.Web.Controllers
 
         public ActionResult MenuOrdenes()
         {
-            if (Session["loginTienda"] == null)
-            {
-                return RedirectToAction("Login", "Security");
-            }
 
             if (Session["Id_Num_UN"] == null)
             {
@@ -129,10 +122,6 @@ namespace ServicesManagement.Web.Controllers
 
         public ActionResult OrdenSeleccionada()
         {
-            if (Session["loginTienda"] == null)
-            {
-                return RedirectToAction("Login", "Security");
-            }
 
             if (Session["Id_Num_UN"] != null)
             {
