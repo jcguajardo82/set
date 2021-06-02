@@ -106,6 +106,11 @@ namespace ServicesManagement.Web.Controllers
 
         public ActionResult MenuOrdenes()
         {
+            if (Session["loginTienda"] == null)
+            {
+                return RedirectToAction("Login", "Security");
+            }
+
             if (Session["Id_Num_UN"] == null)
             {
                 return RedirectToAction("index");
@@ -124,6 +129,11 @@ namespace ServicesManagement.Web.Controllers
 
         public ActionResult OrdenSeleccionada()
         {
+            if (Session["loginTienda"] == null)
+            {
+                return RedirectToAction("Login", "Security");
+            }
+
             if (Session["Id_Num_UN"] != null)
             {
 
