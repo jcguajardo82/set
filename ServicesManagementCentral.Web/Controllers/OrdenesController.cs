@@ -78,12 +78,22 @@ namespace ServicesManagement.Web.Controllers
     {
         string UrlApi = "";
 
+        public OrdenesController()
+        {
+
+        }
         // GET: Ordenes
         public ActionResult Index()
 
         {
             try
             {
+                if (Session["loginTienda"] == null)
+                {
+                    return RedirectToAction("Login", "Security");
+                }
+
+
                 Session["listaUN"] = DALServicesM.GetUN();
                 return View();
             }
