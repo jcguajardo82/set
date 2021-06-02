@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.Security;
 
 namespace ServicesManagement.Web.Controllers
 {
@@ -83,7 +84,11 @@ namespace ServicesManagement.Web.Controllers
                     string Tienda = validateLogin(input);
 
                     Session["loginTienda"] = Tienda;
-                    
+
+                    FormsAuthentication.SetAuthCookie(input.Username, false); // set the formauthentication cookie  
+                    AuthorizationContext authorization = new AuthorizationContext();
+
+            
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -203,6 +208,7 @@ namespace ServicesManagement.Web.Controllers
 
         public ActionResult DoLogout()
         {
+            FormsAuthentication.SignOut();
             ViewBag.MessageLogin = "";
             Session.Remove("login");
             Session.Remove("jsonImpersonate");
