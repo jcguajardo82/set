@@ -112,7 +112,8 @@ namespace ServicesManagement.Web.Controllers
             try
             {
 
-                UserLoginModel u = new UserLoginModel { user = v.Username, pass = Soriana.FWK.FmkTools.Seguridad.Encriptar2(v.Password), tienda = "2180" };
+                //UserLoginModel u = new UserLoginModel { user = v.Username, pass = Soriana.FWK.FmkTools.Seguridad.Encriptar2(v.Password), tienda = "2180" };
+                UserLoginModel u = new UserLoginModel { user = v.Username, pass = Soriana.FWK.FmkTools.Seguridad.Encriptar(v.Password), tienda = "2180" };
                 string tienda = null;
 
                 string json2 = string.Empty;
@@ -127,7 +128,7 @@ namespace ServicesManagement.Web.Controllers
 
                 Soriana.FWK.FmkTools.RestResponse r = Soriana.FWK.FmkTools.RestClient.RequestRest(Soriana.FWK.FmkTools.HttpVerb.POST, System.Configuration.ConfigurationSettings.AppSettings["api_UserAD"], "", json2);
 
-                if (r.message.Contains("1"))
+                if (r.message.Contains("true"))
                 {
                     return true;
                 }
